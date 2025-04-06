@@ -1343,7 +1343,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description_1" "\n                        \n                            1 µH Shielded Multilayer Inductor 50 mA 400mOhm Max 0805 (2012 Metric)\n                        \n"
+		(property "Description" "1 µH Shielded Multilayer Inductor 50 mA 400mOhm Max 0805 (2012 Metric)"
 			(at 0 0 0)
 			(effects
 				(font
@@ -2130,7 +2130,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "1.0A 1.0% Fixed Volt LDO, MIC39100-3.3WS Microchip MIC39100-3.3WS, LDO Voltage Regulator, 1A, 3.3 V +/-1%, 2.25  16 Vin, 3 + Tab-Pin SOT-223"
+		(property "Description" "LDO Voltage Regulator, 1A, 3.3 V +/-1%, 2.25  16 Vin, 3 + Tab-Pin SOT-223"
 			(at 0 0 0)
 			(effects
 				(font
