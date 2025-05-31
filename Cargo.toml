@@ -1,9 +1,52 @@
 [package]
-name = "KiParse"
+name = "kiparse"
 version = "0.1.0"
 edition = "2021"
+rust-version = "1.65.0"
+authors = ["James Bonanno <atlantix-eda@proton.me>"]
+description = "A comprehensive KiCad file format parser for PCB, schematic, and symbol files"
+license = "MIT"
+repository = "https://github.com/saturn77/KiParse"
+readme = "README.md"
+keywords = ["kicad", "pcb", "eda", "parser", "electronics"]
+categories = ["parsing", "science", "simulation"]
+
+[lib]
+name = "kiparse"
+path = "src/lib.rs"
+
+[[bin]]
+name = "kiparse-cli"
+path = "src/bin/cli.rs"
+required-features = ["cli"]
+
+[[example]]
+name = "basic_usage"
+path = "examples/basic_usage.rs"
+
+[[example]]
+name = "layer_extraction"
+path = "examples/layer_extraction.rs"
+
+[[example]]
+name = "symbol_parser"
+path = "examples/symbol_parser.rs"
 
 [dependencies]
-logos = "0.15.0"
-prettytable = "0.10.0"
-serde = {version = "1.0.217", features=["derive"]}
+logos = "0.14"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", optional = true }
+
+# Optional CLI dependencies
+prettytable = { version = "0.10.0", optional = true }
+
+[dev-dependencies]
+serde_json = "1.0"
+
+[features]
+default = []
+cli = ["prettytable", "serde_json"]
+json = ["serde_json"]
+
+[package.metadata.docs.rs]
+all-features = true
