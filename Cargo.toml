@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 rust-version = "1.65.0"
 authors = ["James Bonanno <atlantix-eda@proton.me>"]
-description = "A comprehensive KiCad file format parser for PCB, schematic, and symbol files"
+description = "A practical KiCad file format parser for PCB layer extraction and symbol parsing"
 license = "MIT"
 repository = "https://github.com/saturn77/KiParse"
 readme = "README.md"
@@ -36,6 +36,7 @@ path = "examples/symbol_parser.rs"
 logos = "0.14"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = { version = "1.0", optional = true }
+regex = "1.10"
 
 # Optional CLI dependencies
 prettytable = { version = "0.10.0", optional = true }

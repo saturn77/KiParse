@@ -1,15 +1,12 @@
 //! PCB file parsing module for KiCad .kicad_pcb files
 //! 
-//! This module provides two main parsing approaches:
+//! This module provides layer extraction from KiCad PCB files.
 //! 
-//! 1. **Simple Parser** (`simple_parser`): Fast layer-only extraction for CAM workflows
-//! 2. **Full Parser** (`pcb_parser`): Complete S-expression parsing for detailed analysis
+//! ## Usage Example
 //! 
-//! ## Usage Examples
-//! 
-//! ### Simple Layer Extraction
+//! ### Layer Extraction
 //! ```rust
-//! use kiparse::pcb::simple_parser::parse_layers_only;
+//! use kiparse::pcb::parse_layers_only;
 //! 
 //! let content = r#"(kicad_pcb
 //!   (version "20240108")
@@ -25,36 +22,14 @@
 //! }
 //! # Ok::<(), Box<dyn std::error::Error>>(())
 //! ```
-//! 
-//! ### Full PCB Parsing
-//! ```rust
-//! use kiparse::pcb::pcb_parser::PcbParser;
-//! 
-//! let content = r#"(kicad_pcb
-//!   (version "20240108")
-//!   (generator "pcbnew")
-//!   (layers
-//!     (0 "F.Cu" signal)
-//!   )
-//!   (segment (start 100 50) (end 150 50) (width 0.25) (layer "F.Cu"))
-//! )"#;
-//! let pcb = PcbParser::parse_from_str(content)?;
-//! 
-//! println!("Found {} tracks and {} footprints", 
-//!          pcb.tracks.len(), pcb.footprints.len());
-//! # Ok::<(), Box<dyn std::error::Error>>(())
-//! ```
 
 pub mod types;
-pub mod pcb_parser;
 pub mod simple_parser;
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::error::KicadError;
-    use std::collections::HashMap;
-
+    
     // Test data for minimal valid KiCad PCB file
     const MINIMAL_PCB: &str = r#"(kicad_pcb
   (version "20240108")
@@ -90,19 +65,6 @@ mod tests {
         assert_eq!(b_adhes.name, "B.Adhes");
         assert_eq!(b_adhes.layer_type, "user");
         assert_eq!(b_adhes.user_name, Some("B.Adhesive".to_string()));
-    }
-
-    #[test]
-    fn test_full_parser_minimal_pcb() {
-        let result = PcbParser::parse_from_str(MINIMAL_PCB);
-        assert!(result.is_ok());
-        
-        let pcb = result.unwrap();
-        assert_eq!(pcb.version, "20240108");
-        assert_eq!(pcb.generator, "pcbnew");
-        assert_eq!(pcb.layers.len(), 3);
-        assert_eq!(pcb.tracks.len(), 0);
-        assert_eq!(pcb.footprints.len(), 0);
     }
 
     #[test]
@@ -147,5 +109,4 @@ mod tests {
 
 // Re-export commonly used items
 pub use types::*;
-pub use pcb_parser::PcbParser;
 pub use simple_parser::parse_layers_only;

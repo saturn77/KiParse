@@ -35,10 +35,11 @@ fn main() -> Result<()> {
 }
 
 fn handle_pcb_file(content: &str, json_output: bool) -> Result<()> {
+    let pcb = pcb::parse_layers_only(content)?;
+    
     if json_output {
         #[cfg(feature = "json")]
         {
-            let pcb = pcb::pcb_parser::PcbParser::parse_from_str(content)?;
             println!("{}", serde_json::to_string_pretty(&pcb).unwrap());
         }
         #[cfg(not(feature = "json"))]
@@ -47,9 +48,6 @@ fn handle_pcb_file(content: &str, json_output: bool) -> Result<()> {
             std::process::exit(1);
         }
     } else {
-        // Use simple parser for table output
-        let pcb = pcb::simple_parser::parse_layers_only(content)?;
-        
         println!("PCB Information:");
         println!("================");
         println!("Version: {}", pcb.version);
@@ -73,17 +71,6 @@ fn handle_pcb_file(content: &str, json_output: bool) -> Result<()> {
                 ]);
             }
             table.printstd();
-        }
-        
-        // Try full parsing for additional stats
-        if let Ok(full_pcb) = pcb::pcb_parser::PcbParser::parse_from_str(content) {
-            println!("\nDetailed Statistics:");
-            println!("Tracks: {}", full_pcb.tracks.len());
-            println!("Footprints: {}", full_pcb.footprints.len());
-            println!("Vias: {}", full_pcb.vias.len());
-            println!("Zones: {}", full_pcb.zones.len());
-            println!("Graphics: {}", full_pcb.graphics.len());
-            println!("Texts: {}", full_pcb.texts.len());
         }
     }
     
