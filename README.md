@@ -1,6 +1,6 @@
 # KiParse
 
-A practical KiCad file format parser written in Rust. KiParse provides reliable parsing capabilities for KiCad's native file formats, focusing on what actually works with real-world files.
+A practical KiCad parser written in Rust, operating on native KiCad files and formats. KiParse provides reliable data useful for developers and designers during the course of a design, including an integrated CLI tool `kpx` for rapid PCB analysis and automation workflows.
 
 [![Crates.io](https://img.shields.io/crates/v/kiparse)](https://crates.io/crates/kiparse)
 [![Documentation](https://docs.rs/kiparse/badge.svg)](https://docs.rs/kiparse)
