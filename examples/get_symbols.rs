@@ -9,8 +9,9 @@ use std::env;
 fn main() -> Result<()> {
     let args: Vec<String> = env::args().collect();
     
-    if args.len() != 2 {
+    if args.len() < 2 {
         eprintln!("Usage: {} <file.kicad_sym>", args[0]);
+        eprintln!("Example: {} assets/example_components.kicad_sym", args[0]);
         std::process::exit(1);
     }
     

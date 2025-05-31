@@ -16,7 +16,7 @@
 //! ## Quick Start
 //! 
 //! ```rust
-//! use kiparse::pcb::parse_layers_only;
+//! use kiparse::prelude::*;
 //! 
 //! let pcb_content = r#"(kicad_pcb
 //!   (version "20240108")
@@ -53,6 +53,7 @@
 pub mod pcb;
 pub mod symbol;
 pub mod error;
+pub mod prelude;
 
 // Re-export commonly used types at the crate root
 pub use error::{KicadError, Result};

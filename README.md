@@ -86,20 +86,30 @@ fn main() -> kiparse::Result<()> {
 
 ## Command Line Interface
 
-KiParse includes a CLI tool for quick file analysis:
+KiParse includes a powerful CLI tool called `kpx` (KiParse eXtended) with subcommands for different analysis tasks:
 
 ```bash
-# Install the CLI
-cargo install kiparse --features cli
+# Build and run from source
+cargo run --bin kpx --features cli -- <file> <command> [options]
 
-# Analyze a PCB file
-kiparse board.kicad_pcb
+# Once published to crates.io, you'll be able to install with:
+# cargo install kiparse --features cli
+# This installs the 'kpx' binary to your PATH
 
-# Analyze symbols
-kiparse components.kicad_sym
+# Usage examples:
+kpx board.kicad_pcb details          # Get detailed PCB information
+kpx board.kicad_pcb layers           # Extract layer information
+kpx board.kicad_pcb 3d               # Analyze 3D model coverage
+kpx board.kicad_pcb positions        # Extract component positions
+kpx components.kicad_sym symbols     # Parse symbol libraries
 
-# JSON output
-kiparse board.kicad_pcb --json
+# JSON output for any command:
+kpx board.kicad_pcb details --json
+kpx board.kicad_pcb 3d --json
+
+# Get help:
+kpx --help
+kpx <file> --help
 ```
 
 
@@ -326,24 +336,22 @@ The test suite includes:
 The repository includes several examples demonstrating common use cases:
 
 ```bash
-# Basic PCB analysis
-cargo run --example basic_usage examples/sample.kicad_pcb
-
-# CAM layer extraction
-cargo run --example layer_extraction examples/sample.kicad_pcb
-
-# Symbol library analysis
-cargo run --example symbol_parser examples/sample.kicad_sym
-
-# Component position extraction (real FPGA board)
-cargo run --example component_positions_working
+# All examples work immediately - no arguments needed!
+cargo run --example basic          # Basic PCB analysis
+cargo run --example get_layers     # Extract layer information
+cargo run --example get_positions  # Extract component positions
+cargo run --example get_symbols    # Parse symbol libraries
+cargo run --example get_details    # Detailed PCB information
+cargo run --example get_3d_models  # Analyze 3D model coverage
 ```
+
+**💡 Tip**: Start with `cargo run --example basic` for a quick overview of what KiParse can do!
 
 ## Feature Flags
 
 | Feature | Description | Default |
 |---------|-------------|---------|
-| `cli` | Command-line interface | ❌ |
+| `cli` | Command-line interface (`kpx` binary) | ❌ |
 | `json` | JSON serialization support | ❌ |
 | `serde` | Serde serialization for all types | ✅ |
 

@@ -9,12 +9,22 @@ use std::env;
 fn main() -> Result<()> {
     let args: Vec<String> = env::args().collect();
     
-    if args.len() != 2 {
+    let filename: &str;
+    // Check if a filename was provided as a command line argument
+    // If not, use a default file for demonstration purposes
+    // This is useful for quick testing without needing to specify a file every time.
+    
+    if args.len() < 2 {
         eprintln!("Usage: {} <file.kicad_pcb>", args[0]);
-        std::process::exit(1);
+        eprintln!("Example: {} assets/fpga.kicad_pcb", args[0]);
+        filename = "assets/fpga.kicad_pcb";
+        eprintln!("Using default file: {}", filename);
+    } else {
+        eprintln!("Parsing file: {}", args[1]);
+        filename = &args[1];
     }
     
-    let filename = &args[1];
+
     let content = std::fs::read_to_string(filename)?;
     
     // Use the fast simple parser for layer extraction

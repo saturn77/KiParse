@@ -4,24 +4,27 @@ This directory contains examples demonstrating how to use KiParse for various Ki
 
 ## Quick Start
 
-```bash
-# Run any example with:
-cargo run --example <example_name> [arguments]
+All examples now work immediately without requiring any arguments!
 
-# For examples that need features:
-cargo run --example <example_name> --features <feature>
+```bash
+# Basic examples - no arguments needed!
+cargo run --example basic          # Basic PCB analysis
+cargo run --example get_layers     # Extract layer information
+cargo run --example get_positions  # Extract component positions
+cargo run --example get_symbols    # Parse symbol libraries
+cargo run --example get_details    # Detailed PCB information
+cargo run --example get_3d_models  # Analyze 3D model coverage
 ```
 
 ## Available Examples
 
-### 📋 Basic Usage
+### 📋 Basic
 
-**File**: `basic_usage.rs`  
-**Purpose**: Demonstrates basic layer extraction and file analysis  
+**File**: `basic.rs`  
+**Purpose**: Basic PCB analysis showing layers and file statistics  
 **Usage**: 
 ```bash
-cargo run --example basic_usage <file.kicad_pcb>
-cargo run --example basic_usage assets/fpga.kicad_pcb
+cargo run --example basic
 ```
 **What it shows**:
 - Layer parsing and categorization (signal vs other layers)
@@ -30,13 +33,13 @@ cargo run --example basic_usage assets/fpga.kicad_pcb
 
 ---
 
-### 🔍 Layer Extraction
+### 🔍 Get Layers
 
-**File**: `layer_extraction.rs`  
-**Purpose**: Focused layer parsing with detailed layer information  
+**File**: `get_layers.rs`  
+**Purpose**: Focused layer extraction with detailed layer information  
 **Usage**:
 ```bash
-cargo run --example layer_extraction <file.kicad_pcb>
+cargo run --example get_layers
 ```
 **What it shows**:
 - Detailed layer stack analysis
@@ -45,13 +48,13 @@ cargo run --example layer_extraction <file.kicad_pcb>
 
 ---
 
-### 📚 Symbol Library Parsing
+### 📚 Get Symbols
 
-**File**: `symbol_parser.rs`  
+**File**: `get_symbols.rs`  
 **Purpose**: Parse KiCad symbol library files  
 **Usage**:
 ```bash
-cargo run --example symbol_parser <file.kicad_sym>
+cargo run --example get_symbols
 ```
 **What it shows**:
 - Symbol library parsing
@@ -60,17 +63,16 @@ cargo run --example symbol_parser <file.kicad_sym>
 
 ---
 
-### 🎯 Component Position Extraction (Working)
+### 🎯 Get Positions ⭐ **RECOMMENDED**
 
-**File**: `component_positions_working.rs`  
+**File**: `get_positions.rs`  
 **Purpose**: **Real-world component position extraction** from actual PCB files  
 **Usage**:
 ```bash
-cargo run --example component_positions_working
-# Uses assets/fpga.kicad_pcb automatically
+cargo run --example get_positions
 ```
 **What it shows**:
-- ✅ **Recommended approach** for component data extraction
+- ✅ **Best example to try first** - just run it!
 - Hybrid parsing (simple parser + regex)
 - Component grouping by type (R, C, U, etc.)
 - Natural sorting of references (R1, R2, R10)
@@ -81,18 +83,35 @@ cargo run --example component_positions_working
 
 ---
 
-### 🧪 Component Position Extraction (Simple)
+### 📊 Get Details
 
-**File**: `component_positions_simple.rs`  
-**Purpose**: Alternative regex-only approach for component extraction  
+**File**: `get_details.rs`  
+**Purpose**: Comprehensive PCB file analysis with detailed statistics  
 **Usage**:
 ```bash
-cargo run --example component_positions_simple
+cargo run --example get_details
 ```
 **What it shows**:
-- Pure regex-based component extraction
-- Simplified pattern matching
-- Alternative to the hybrid approach
+- Complete PCB file analysis
+- Detailed statistics and metrics
+- Board complexity assessment
+
+---
+
+### 🎨 Get 3D Models ⭐ **NEW**
+
+**File**: `get_3d_models.rs`  
+**Purpose**: Analyze 3D model coverage for PCB visualization  
+**Usage**:
+```bash
+cargo run --example get_3d_models
+```
+**What it shows**:
+- 3D model coverage statistics (which components have 3D models)
+- Model type distribution (STEP, WRL, etc.)
+- 3D library usage analysis
+- Component types with/without 3D models
+- Lists components missing 3D models for better visualization
 
 **Dependencies**: Requires `regex = "1.10"` in your Cargo.toml
 
