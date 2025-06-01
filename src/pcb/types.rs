@@ -1,3 +1,9 @@
+//! Types for PCB files
+//! 
+//! This module defines the data structures used to represent PCB files in KiCad format.
+//! It includes structures for points, rectangles, arcs, layers, footprints, tracks, vias, zones, texts, and graphics.
+//! The structures are designed to be serializable and deserializable using Serde.
+//! The `PcbFile` structure serves as the main entry point for parsing and manipulating PCB files.
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 

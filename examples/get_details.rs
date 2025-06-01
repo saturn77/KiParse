@@ -10,6 +10,7 @@ use regex::Regex;
 #[derive(Debug)]
 struct ComponentData {
     reference: String,
+    #[allow(dead_code)]
     footprint: String,
     x: f64,
     y: f64,

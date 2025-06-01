@@ -60,6 +60,7 @@ pub use error::{KicadError, Result};
 
 // Re-export the main parsing functions for convenience
 pub use pcb::parse_layers_only;
+pub use pcb::detail_parser::DetailParser;
 pub use symbol::symbol_parser::parse_symbol_lib;
 
 // Re-export PCB data types with module prefix to avoid conflicts

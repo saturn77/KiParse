@@ -25,6 +25,7 @@
 
 pub mod types;
 pub mod simple_parser;
+pub mod detail_parser;
 
 #[cfg(test)]
 mod tests {
@@ -110,3 +111,4 @@ mod tests {
 // Re-export commonly used items
 pub use types::*;
 pub use simple_parser::parse_layers_only;
+pub use detail_parser::DetailParser;

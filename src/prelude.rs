@@ -18,6 +18,7 @@ pub use crate::error::{KicadError, Result};
 
 // Re-export main parsing functions
 pub use crate::pcb::parse_layers_only;
+pub use crate::pcb::detail_parser::DetailParser;
 pub use crate::symbol::symbol_parser::parse_symbol_lib;
 
 // Re-export core PCB types
